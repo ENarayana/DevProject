@@ -1,15 +1,18 @@
-package test.api.devproject.module;
+package test.api.devproject.Dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import test.api.devproject.module.Category;
 
 @Getter
 @Setter
-public class Product extends BaseModule{
 
+public class GenericProductDto {
+
+    private Long id;
     private String title;
     private String description;
     private double price;
     private String image;
-    private Category category;
+    private String category;
 }

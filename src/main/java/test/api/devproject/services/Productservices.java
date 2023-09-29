@@ -1,8 +1,12 @@
 package test.api.devproject.services;
 
 
-public interface Productservices {
+import test.api.devproject.Dto.GenericProductDto;
+import test.api.devproject.module.Product;
 
-    String getProductById (Long id);
+public interface Productservices {
+    GenericProductDto createProduct(GenericProductDto product);
+
+    GenericProductDto getProductById (Long id);
 
 }
