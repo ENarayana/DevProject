@@ -1,4 +1,4 @@
-package test.api.devproject.Dto;
+package test.api.devproject.thirdPartyProductService.fakeStore;
 
 import lombok.Getter;
 import lombok.Setter;
