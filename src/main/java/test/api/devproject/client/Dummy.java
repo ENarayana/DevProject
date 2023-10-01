@@ -1,0 +1,37 @@
+package test.api.devproject.client;
+
+
+public class Dummy {
+
+    int year;
+    int age;
+    String banch;
+    char section;
+    int accYear;
+
+    public Dummy(int year){
+        this.year = year;
+
+    }
+
+//    @Override
+//    public String toString() {
+//        return "Dummy{" +
+//                "year=" + year +
+//                ", age=" + age +
+//                ", banch='" + banch + '\'' +
+//                ", section=" + section +
+//                ", accYear=" + accYear +
+//                '}';
+//    }
+
+    public static void main(String[] args) {
+
+        Dummy dummy = new Dummy(2012);
+
+        System.out.println(dummy.year);
+
+
+    }
+
+}
