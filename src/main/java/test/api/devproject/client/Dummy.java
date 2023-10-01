@@ -14,17 +14,6 @@ public class Dummy {
 
     }
 
-//    @Override
-//    public String toString() {
-//        return "Dummy{" +
-//                "year=" + year +
-//                ", age=" + age +
-//                ", banch='" + banch + '\'' +
-//                ", section=" + section +
-//                ", accYear=" + accYear +
-//                '}';
-//    }
-
     public static void main(String[] args) {
 
         Dummy dummy = new Dummy(2012);
