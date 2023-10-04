@@ -1,15 +1,15 @@
 package test.api.devproject.module;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Data
-@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product extends BaseModule{
 
     private String title;
@@ -18,4 +18,6 @@ public class Product extends BaseModule{
     private String image;
     @ManyToOne
     private Category category;
+
+
 }
