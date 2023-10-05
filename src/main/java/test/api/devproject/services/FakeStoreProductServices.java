@@ -1,5 +1,6 @@
 package test.api.devproject.services;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import test.api.devproject.Dto.GenericProductDto;
 import test.api.devproject.thirdPartyProductService.fakeStore.FakeStoreDto;
@@ -7,7 +8,7 @@ import test.api.devproject.thirdPartyProductService.fakeStore.FakeStoreProductSe
 
 import java.util.*;
 
-@Service ("FakeStoreProductServices")
+@Repository("FakeStoreProductServices")
 public class FakeStoreProductServices implements Productservices {
 
     private FakeStoreProductServiceClient fakeStoreProductServiceClient;
@@ -30,6 +31,7 @@ public class FakeStoreProductServices implements Productservices {
         this.fakeStoreProductServiceClient = fakeStoreProductServiceClient;
     }
 
+    @Override
     public GenericProductDto createProduct(GenericProductDto product) {
         return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.createProduct(product));
             }
@@ -43,6 +45,7 @@ public class FakeStoreProductServices implements Productservices {
 //        return response.getBody();
 //    }
 
+    @Override
     public GenericProductDto updateProduct(Long id, GenericProductDto product) {
         return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.updateProduct(id,product));
     }
