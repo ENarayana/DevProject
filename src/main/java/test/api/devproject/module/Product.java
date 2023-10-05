@@ -1,9 +1,6 @@
 package test.api.devproject.module;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -16,10 +13,14 @@ public class Product extends BaseModule{
     private String title;
     private String description;
     private String image;
-    @ManyToOne
-    private Category category;
-    @OneToOne
-    private Price price;
+
+//    @ManyToOne(cascade = {CascadeType.PERSIST})
+//    @JoinColumn(name = "category")
+//    private Category category;
+//    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+////    @Fetch(FetchMode.JOIN)
+//    private Price price;
+//    private int inventoryCount;
 
 
 }
