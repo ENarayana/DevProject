@@ -20,6 +20,9 @@ public class Dummy {
 
         System.out.println(dummy.year);
 
+        System.out.println("Thank you ");
+
+
 
     }
 
