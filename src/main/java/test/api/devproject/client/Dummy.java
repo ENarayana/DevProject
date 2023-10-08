@@ -22,6 +22,8 @@ public class Dummy {
 
         System.out.println("Thank you ");
 
+        System.out.println("Good work");
+
 
 
     }
