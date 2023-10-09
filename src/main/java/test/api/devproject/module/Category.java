@@ -1,8 +1,6 @@
 package test.api.devproject.module;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +18,9 @@ import java.util.List;
 @AllArgsConstructor
 public class Category extends BaseModule {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY) // Adjust the strategy if needed
+//    private Long id;
     @Column
     private String name;
 

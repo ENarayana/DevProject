@@ -7,7 +7,7 @@ import test.api.devproject.module.Product;
 import java.util.List;
 
 public interface Productservices {
-    GenericProductDto createProduct(GenericProductDto product);
+    GenericProductDto createProduct(GenericProductDto genericProductDto);
 
     GenericProductDto updateProduct(Long id, GenericProductDto product);
 

@@ -8,18 +8,24 @@ import org.springframework.stereotype.Repository;
 import test.api.devproject.module.Category;
 import test.api.devproject.module.Product;
 
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
+//    @Query(value="SELECT protocol, COUNT(Distinct personID) from person_counts WHERE(datetime BETWEEN :beginDate and :endDate)and personID NOT LIKE '%test%' GROUP by protocol", nativeQuery=true)
+//    Map<String, BigInteger> findPersonCountsByDate(Date beginDate, Date endDate);
+
 
    // Product findByTitleEqualsAndPrice(double price);
 
-     Product findByTitleEquals(String title);
+  //   Product findByTitleEquals(String title);
 
-    Product findByTitleEqualsAndPrice(String title, double price);
+ //  List<Product> findByTitleEqualsAndPrice(String title, Double price);
 
  //   List<Product> findAllByPrice_Currency(String currency);
 
