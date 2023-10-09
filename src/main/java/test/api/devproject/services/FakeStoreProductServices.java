@@ -21,8 +21,8 @@ public class FakeStoreProductServices implements Productservices {
         product.setImage(fakeStoreDto.getImage());
         product.setDescription(fakeStoreDto.getDescription());
         product.setTitle(fakeStoreDto.getTitle());
-        product.setPrice(fakeStoreDto.getPrice());
-        product.setCategory(fakeStoreDto.getCategory());
+     //   product.setPrice(fakeStoreDto.getPrice());
+     //   product.setCategory(fakeStoreDto.getCategory());
 
         return product;
     }

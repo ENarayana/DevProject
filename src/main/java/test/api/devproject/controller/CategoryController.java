@@ -37,6 +37,11 @@ public class CategoryController {
         return productDtos;
     }
 
+
+    @GetMapping("/categoryTitle")
+    public List<String> getCategoryTitle() {
+        return categoryService.findAllCategories();
+    }
     @GetMapping("/titles/")
     public List<String> getProductTitles(@RequestBody GetProductRequestDto requestDto) {
 

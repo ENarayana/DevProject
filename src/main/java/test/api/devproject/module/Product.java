@@ -13,8 +13,10 @@ public class Product extends BaseModule{
     private String title;
     private String description;
     private String image;
-    @Column(name = "product_price")
-    private double price;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_price")
+    private Price price;
 
     @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "category")

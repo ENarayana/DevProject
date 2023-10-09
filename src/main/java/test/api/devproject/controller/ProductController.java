@@ -85,10 +85,16 @@ public class ProductController {
         );
     }
 
-    @PostMapping
-    public GenericProductDto createProduct(@RequestBody GenericProductDto product) {
-//        System.out.println(product.name);
-        return productservices.createProduct(product);
+//    @PostMapping
+//    public GenericProductDto createProduct(@RequestBody GenericProductDto product) {
+////        System.out.println(product.name);
+//        return productservices.createProduct(product);
+//    }
+
+
+    @PostMapping ("/newproduct")
+    public GenericProductDto postProduct(@RequestBody GenericProductDto genericProductDto) {
+        return productservices.createProduct(genericProductDto);
     }
 
     @PutMapping("{id}")
