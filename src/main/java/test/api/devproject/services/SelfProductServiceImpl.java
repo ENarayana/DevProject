@@ -33,31 +33,30 @@ public class SelfProductServiceImpl implements Productservices {
         Category category=null;
 
         Optional<Category> category1 = categoryRepository.findByName(genericProductDto.getCategory().getName());
-
-        if(category1.isEmpty()){
-            category = new Category();
-            category.setName(String.valueOf(genericProductDto.getCategory()));
-            categoryRepository.save(category);
-        }else{
+        if (category1.isPresent()) {
+            // Category found, use it
             category = category1.get();
+        } else {
+            // Category not found, create a new one
+            category = new Category();
+            category.setName(genericProductDto.getCategory().getName());
+            categoryRepository.save(category);
         }
+
+        Price price = new Price();
+        price.setPrice(genericProductDto.getPrice().getPrice());
+        price.setCurrency(genericProductDto.getPrice().getCurrency());
+        priceRepository.save(price);
 
         Product product = new Product();
         product.setTitle(genericProductDto.getTitle());
         product.setImage(genericProductDto.getImage());
         product.setDescription(genericProductDto.getDescription());
         product.setCategory(genericProductDto.getCategory());
-        product.setPrice(genericProductDto.getPrice());
+        product.setPrice(price);
         productRepository.save(product);
 
-        Price price = new Price();
-        price.setPrice(genericProductDto.getPrice().getPrice());
-        price.setCurrency(genericProductDto.getPrice().getCurrency());
-     //   productRepository.save(price);
-
-  //      price.setCurrency(genericProductDto.getCurrency());
-
-        return genericProductDto;
+          return genericProductDto;
     }
 
     @Override
