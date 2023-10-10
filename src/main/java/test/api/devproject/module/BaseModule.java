@@ -17,5 +17,13 @@ public class BaseModule {
     @Column (name = "id", columnDefinition = "binary(16)", nullable = false, updatable = false)
     private UUID uuid;
 
+    public void setId(UUID productId) {
+
+    }
+
+//    public void setId(UUID productId) {
+//
+//    }
+
     //private Long id;
 }

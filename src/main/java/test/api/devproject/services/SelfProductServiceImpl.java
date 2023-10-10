@@ -32,16 +32,17 @@ public class SelfProductServiceImpl implements Productservices {
     public GenericProductDto createProduct(GenericProductDto genericProductDto) {
         Category category=null;
 
-        Optional<Category> category1 = categoryRepository.findByName(genericProductDto.getCategory().getName());
+        Optional<Category> category1 = categoryRepository.findByName(genericProductDto.getCategory());
         if (category1.isPresent()) {
             // Category found, use it
             category = category1.get();
         } else {
             // Category not found, create a new one
             category = new Category();
-            category.setName(genericProductDto.getCategory().getName());
+            category.setName(genericProductDto.getCategory());
             categoryRepository.save(category);
         }
+
 
         Price price = new Price();
         price.setPrice(genericProductDto.getPrice().getPrice());
@@ -49,12 +50,16 @@ public class SelfProductServiceImpl implements Productservices {
         priceRepository.save(price);
 
         Product product = new Product();
+        UUID productId = UUID.randomUUID();  // Generate a unique ID
+        product.setId(productId);  // Set the id on the Product entity
         product.setTitle(genericProductDto.getTitle());
         product.setImage(genericProductDto.getImage());
         product.setDescription(genericProductDto.getDescription());
-        product.setCategory(genericProductDto.getCategory());
+        product.setCategory(category); // genericProductDto.getCategory()
         product.setPrice(price);
         productRepository.save(product);
+
+       genericProductDto.setId(productId);
 
           return genericProductDto;
     }
