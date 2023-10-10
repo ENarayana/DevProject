@@ -3,6 +3,8 @@ package test.api.devproject.module;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
@@ -21,7 +23,9 @@ public class Product extends BaseModule{
     @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "category")
     private Category category;
-  //  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+
+
+    //  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
 ////    @Fetch(FetchMode.JOIN)
 //    private Price price;
 //    private int inventoryCount;

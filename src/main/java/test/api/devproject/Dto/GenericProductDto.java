@@ -5,6 +5,8 @@ import lombok.Setter;
 import test.api.devproject.module.Category;
 import test.api.devproject.module.Price;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 
@@ -16,4 +18,5 @@ public class GenericProductDto {
     private Price price = new Price();
     private String image;
     private Category category;
+
 }
