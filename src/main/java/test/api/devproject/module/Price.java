@@ -24,6 +24,6 @@ public class Price extends BaseModule{
 //    @Column(name = "price_column", columnDefinition = "NUMERIC")
 //   private double price;
 
-    @Column(name = "price_column")
-    private double price;
+  //  @Column(name = "price_column")
+   private double price;
 }
