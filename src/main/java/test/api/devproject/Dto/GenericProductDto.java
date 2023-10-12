@@ -1,5 +1,6 @@
 package test.api.devproject.Dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import test.api.devproject.module.Category;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class GenericProductDto {
 
     private String id;

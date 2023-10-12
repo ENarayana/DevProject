@@ -1,5 +1,6 @@
 package test.api.devproject.services;
 
+import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import test.api.devproject.Dto.GenericProductDto;
@@ -7,9 +8,11 @@ import test.api.devproject.module.Category;
 import test.api.devproject.module.Price;
 import test.api.devproject.module.Product;
 import test.api.devproject.repository.CategoryRepository;
+import test.api.devproject.repository.CustomQueries;
 import test.api.devproject.repository.PriceRepository;
 import test.api.devproject.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,11 +24,14 @@ public class SelfProductServiceImpl implements Productservices {
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
     private PriceRepository priceRepository;
+    private CustomQueries customQueries;
 
-    public SelfProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository, PriceRepository priceRepository) {
+    public SelfProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository,
+                                  PriceRepository priceRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.priceRepository = priceRepository;
+//        this.customQueries = customQueries;
     }
 
     @Override
@@ -77,8 +83,39 @@ public class SelfProductServiceImpl implements Productservices {
 
     @Override
     public List<GenericProductDto> getProducts() {
-        return null;
+
+        List<Product> optionalProduct = productRepository.findAll();
+
+        List<GenericProductDto> productDtos = new ArrayList<>();
+
+        for (Product product : optionalProduct) {
+
+            Hibernate.initialize(product.getPrice());
+            Hibernate.initialize(product.getCategory());
+            GenericProductDto genericProductDto = new GenericProductDto();
+            genericProductDto.setName(product.getName);
+            genericProductDto.setCategory(String.valueOf(product.getCategory()));
+            genericProductDto.setTitle(product.getTitle());
+            genericProductDto.setDescription(product.getDescription());
+            genericProductDto.setImage(product.getImage());
+            genericProductDto.setPrice(product.getPrice());
+            //    genericProductDto.setId(product.getId);
+
+            productDtos.add(genericProductDto);
+        }
+        return productDtos;
     }
+
+//            List<Product> products = productRepository.findAll();
+//            List<GenericProductDto> product = new ArrayList<>();
+//            products.forEach(prod -> {
+//                GenericProductDto genericproduct = convertProductToGenericProduct(prod);
+//                product.add(genericproduct);
+//            });
+//            return product;
+//        }
+
+
 
     @Override
     public GenericProductDto deleteProduct(Long id) {

@@ -97,6 +97,11 @@ public class ProductController {
         return productservices.createProduct(genericProductDto);
     }
 
+    @GetMapping("/newGetAllProducts")
+    public List<GenericProductDto> getAllProducts(){
+        return productservices.getProducts();
+    }
+
     @PutMapping("{id}")
     public void updateProductById() {
 
