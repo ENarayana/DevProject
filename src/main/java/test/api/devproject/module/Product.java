@@ -16,8 +16,8 @@ public class Product extends BaseModule{
     private String description;
     private String image;
 
-    @OneToOne(fetch = FetchType.LAZY) //    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
-   // @JoinColumn(name = "product_price")
+    @OneToOne(fetch = FetchType.EAGER) //    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "price_id")
     private Price price;
 
     @ManyToOne(cascade = {CascadeType.PERSIST})
