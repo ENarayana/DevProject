@@ -2,7 +2,10 @@ package test.api.devproject.services;
 
 import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import test.api.devproject.Dto.GenericProductDto;
 import test.api.devproject.module.Category;
 import test.api.devproject.module.Price;
@@ -36,19 +39,22 @@ public class SelfProductServiceImpl implements Productservices {
 
     @Override
     public GenericProductDto createProduct(GenericProductDto genericProductDto) {
-        Category category=null;
+//        Category category=null;
+//
+//        Optional<Category> category1 = categoryRepository.findByName(genericProductDto.getCategory());
+//        if (category1.isPresent()) {
+//            // Category found, use it
+//            category = category1.get();
+//        } else {
+//            // Category not found, create a new one
+//            category = new Category();
+//            category.setName(genericProductDto.getCategory());
+//            categoryRepository.save(category);
+//        }
 
-        Optional<Category> category1 = categoryRepository.findByName(genericProductDto.getCategory());
-        if (category1.isPresent()) {
-            // Category found, use it
-            category = category1.get();
-        } else {
-            // Category not found, create a new one
-            category = new Category();
-            category.setName(genericProductDto.getCategory());
-            categoryRepository.save(category);
-        }
-
+        Category category = new Category();
+        category.setName(genericProductDto.getName());
+        categoryRepository.save(category);
 
         Price price = new Price();
         price.setPrice(genericProductDto.getPrice().getPrice());
@@ -64,6 +70,7 @@ public class SelfProductServiceImpl implements Productservices {
         product.setCategory(category); // genericProductDto.getCategory()
         product.setPrice(price);
         productRepository.save(product);
+
 
        genericProductDto.setId(productId);
 
@@ -93,17 +100,45 @@ public class SelfProductServiceImpl implements Productservices {
             Hibernate.initialize(product.getPrice());
             Hibernate.initialize(product.getCategory());
             GenericProductDto genericProductDto = new GenericProductDto();
-            genericProductDto.setName(product.getName);
-            genericProductDto.setCategory(String.valueOf(product.getCategory()));
+            genericProductDto.setName(product.getCategory().getName());
             genericProductDto.setTitle(product.getTitle());
             genericProductDto.setDescription(product.getDescription());
             genericProductDto.setImage(product.getImage());
             genericProductDto.setPrice(product.getPrice());
-            //    genericProductDto.setId(product.getId);
+           genericProductDto.setId(product.getUuid());
 
             productDtos.add(genericProductDto);
         }
         return productDtos;
+    }
+
+  @Override
+    public GenericProductDto getProductSingle(UUID id){
+//      System.out.println("Received id: " + id);
+        Optional<Product> productOptional = productRepository.findById(id);
+//      System.out.println("Product present: " + productOptional.isPresent());
+        if(productOptional.isPresent()) {
+            Product product = productOptional.get();
+
+            GenericProductDto genericProductDto = new GenericProductDto();
+            genericProductDto.setId(product.getUuid());
+            genericProductDto.setName(product.getCategory().getName());
+            genericProductDto.setDescription(product.getDescription());
+            genericProductDto.setImage(product.getImage());
+            genericProductDto.setTitle(product.getTitle());
+            genericProductDto.setPrice(product.getPrice());
+
+            return genericProductDto;
+        }
+        else {
+            throw new ProductNotFoundException("Product not found for id: " + id);
+        }
+    }
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public class ProductNotFoundException extends RuntimeException {
+        public ProductNotFoundException(String message) {
+            super(message);
+        }
     }
 
 //            List<Product> products = productRepository.findAll();

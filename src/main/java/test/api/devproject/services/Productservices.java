@@ -5,6 +5,7 @@ import test.api.devproject.Dto.GenericProductDto;
 import test.api.devproject.module.Product;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface Productservices {
     GenericProductDto createProduct(GenericProductDto genericProductDto);
@@ -15,5 +16,10 @@ public interface Productservices {
 
     List<GenericProductDto> getProducts();
 
+   // GenericProductDto getSingleProduct(UUID id);
+
     GenericProductDto deleteProduct(Long id);
+
+    GenericProductDto getProductSingle(UUID id);
+
 }

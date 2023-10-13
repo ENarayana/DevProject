@@ -24,6 +24,9 @@ public class Product extends BaseModule{
     @JoinColumn(name = "category")
     private Category category;
 
+    public UUID getUuid() {
+        return UUID.randomUUID();
+    }
 
 
     //  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
