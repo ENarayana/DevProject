@@ -103,7 +103,7 @@ public class ProductController {
     }
 
     @GetMapping("/getSingleProduct/{id}")
-    public GenericProductDto getSingleProductById(@PathVariable("id") UUID id){
+    public GenericProductDto getSingleProductById(@PathVariable("id") Long id){
         return productservices.getProductSingle(id);
     }
 

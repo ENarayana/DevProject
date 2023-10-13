@@ -20,6 +20,6 @@ public interface Productservices {
 
     GenericProductDto deleteProduct(Long id);
 
-    GenericProductDto getProductSingle(UUID id);
+    GenericProductDto getProductSingle(Long id);
 
 }

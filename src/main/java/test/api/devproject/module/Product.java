@@ -10,13 +10,14 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product extends BaseModule{
+public class Product extends BaseModule {
 
     private String title;
     private String description;
     private String image;
 
-    @OneToOne(fetch = FetchType.EAGER) //    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
+    //    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "price_id")
     private Price price;
 
@@ -24,9 +25,11 @@ public class Product extends BaseModule{
     @JoinColumn(name = "category")
     private Category category;
 
-    public UUID getUuid() {
-        return UUID.randomUUID();
-    }
+}
+
+//    public UUID getUuid() {
+//        return UUID.randomUUID();
+//    }
 
 
     //  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
@@ -35,4 +38,4 @@ public class Product extends BaseModule{
 //    private int inventoryCount;
 
 
-}
+//}

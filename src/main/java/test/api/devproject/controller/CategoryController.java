@@ -18,9 +18,9 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/{uuid}")
-    public List<ProductDto> getCategory(@PathVariable("uuid") String uuid) {
-        List<Product> products = categoryService.getCategory(uuid).getProducts();
+    @GetMapping("/{id}")
+    public List<ProductDto> getCategory(@PathVariable("id") Long id) {
+        List<Product> products = categoryService.getCategory(id).getProducts();
 
         List<ProductDto> productDtos = new ArrayList<>();
 
@@ -45,8 +45,8 @@ public class CategoryController {
     @GetMapping("/titles/")
     public List<String> getProductTitles(@RequestBody GetProductRequestDto requestDto) {
 
-        List<String> uuids = requestDto.getUuids();
+        List<Long> ids = requestDto.getId();
 
-        return categoryService.getProductTitles(uuids);
+        return categoryService.getProductTitles(ids);
     }
 }

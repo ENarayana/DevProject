@@ -16,7 +16,7 @@ import java.util.UUID;
 import java.util.function.Function;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, UUID> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 //    @Query(value="SELECT protocol, COUNT(Distinct personID) from person_counts WHERE(datetime BETWEEN :beginDate and :endDate)and personID NOT LIKE '%test%' GROUP by protocol", nativeQuery=true)
 //    Map<String, BigInteger> findPersonCountsByDate(Date beginDate, Date endDate);
 

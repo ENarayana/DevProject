@@ -72,7 +72,7 @@ public class FakeStoreProductServices implements Productservices {
     }
 
     @Override
-    public GenericProductDto getProductSingle(UUID id) {
+    public GenericProductDto getProductSingle(Long id) {
         return null;
     }
 }

@@ -39,31 +39,21 @@ public class SelfProductServiceImpl implements Productservices {
 
     @Override
     public GenericProductDto createProduct(GenericProductDto genericProductDto) {
-//        Category category=null;
-//
-//        Optional<Category> category1 = categoryRepository.findByName(genericProductDto.getCategory());
-//        if (category1.isPresent()) {
-//            // Category found, use it
-//            category = category1.get();
-//        } else {
-//            // Category not found, create a new one
-//            category = new Category();
-//            category.setName(genericProductDto.getCategory());
-//            categoryRepository.save(category);
-//        }
 
         Category category = new Category();
         category.setName(genericProductDto.getName());
+        category.setId(genericProductDto.getId());
         categoryRepository.save(category);
 
         Price price = new Price();
         price.setPrice(genericProductDto.getPrice().getPrice());
         price.setCurrency(genericProductDto.getPrice().getCurrency());
+        price.setId(genericProductDto.getPrice().getId());
         priceRepository.save(price);
 
         Product product = new Product();
-        UUID productId = UUID.randomUUID();  // Generate a unique ID
-        product.setId(productId);  // Set the id on the Product entity
+
+        product.setId(genericProductDto.getId());
         product.setTitle(genericProductDto.getTitle());
         product.setImage(genericProductDto.getImage());
         product.setDescription(genericProductDto.getDescription());
@@ -71,14 +61,15 @@ public class SelfProductServiceImpl implements Productservices {
         product.setPrice(price);
         productRepository.save(product);
 
+       genericProductDto.setId(product.getId());
+       genericProductDto.getPrice().setId(price.getId());
 
-       genericProductDto.setId(productId);
-
-          return genericProductDto;
+        return genericProductDto;
     }
 
     @Override
     public GenericProductDto updateProduct(Long id, GenericProductDto product) {
+        
         return null;
     }
 
@@ -105,15 +96,14 @@ public class SelfProductServiceImpl implements Productservices {
             genericProductDto.setDescription(product.getDescription());
             genericProductDto.setImage(product.getImage());
             genericProductDto.setPrice(product.getPrice());
-           genericProductDto.setId(product.getUuid());
-
+           genericProductDto.setId(product.getId());
             productDtos.add(genericProductDto);
         }
         return productDtos;
     }
 
   @Override
-    public GenericProductDto getProductSingle(UUID id){
+    public GenericProductDto getProductSingle(Long id){
 //      System.out.println("Received id: " + id);
         Optional<Product> productOptional = productRepository.findById(id);
 //      System.out.println("Product present: " + productOptional.isPresent());
@@ -121,7 +111,7 @@ public class SelfProductServiceImpl implements Productservices {
             Product product = productOptional.get();
 
             GenericProductDto genericProductDto = new GenericProductDto();
-            genericProductDto.setId(product.getUuid());
+            genericProductDto.setId(product.getId());
             genericProductDto.setName(product.getCategory().getName());
             genericProductDto.setDescription(product.getDescription());
             genericProductDto.setImage(product.getImage());

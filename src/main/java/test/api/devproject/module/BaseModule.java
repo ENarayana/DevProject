@@ -1,9 +1,6 @@
 package test.api.devproject.module;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
@@ -12,14 +9,27 @@ import java.util.UUID;
 public class BaseModule {
 
     @Id
-    @GeneratedValue(generator = "uuidgenerator")
-    @GenericGenerator(name = "uuidgenerator", strategy = "uuid2")
-    @Column (name = "id", columnDefinition = "binary(16)", nullable = false, updatable = false)
-    private UUID uuid;
+    @GeneratedValue
+    @Column(name = "ID")
+    private Long id;
 
-    public void setId(UUID productId) {
+
+
+    public void setId(Long id) {
 
     }
+
+    public Long getId() {
+        return id;
+    }
+}
+//    @GenericGenerator(name = "uuidgenerator", strategy = "uuid2")
+//    @Column (name = "id", columnDefinition = "binary(16)", nullable = false, updatable = false)
+//    private UUID uuid;
+
+//    public void setId(UUID productId) {
+//
+//    }
 
 //    public UUID getUuid(){
 //        return uuid;
@@ -31,4 +41,4 @@ public class BaseModule {
 //    }
 
     //private Long id;
-}
+//}
