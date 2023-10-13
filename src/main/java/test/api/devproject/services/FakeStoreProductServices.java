@@ -70,4 +70,9 @@ public class FakeStoreProductServices implements Productservices {
 
         return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.deleteProduct(id));
     }
+
+    @Override
+    public GenericProductDto getProductSingle(UUID id) {
+        return null;
+    }
 }

@@ -102,6 +102,11 @@ public class ProductController {
         return productservices.getProducts();
     }
 
+    @GetMapping("/getSingleProduct/{id}")
+    public GenericProductDto getSingleProductById(@PathVariable("id") UUID id){
+        return productservices.getProductSingle(id);
+    }
+
     @PutMapping("{id}")
     public void updateProductById() {
 

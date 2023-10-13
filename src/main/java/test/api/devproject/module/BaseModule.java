@@ -21,6 +21,11 @@ public class BaseModule {
 
     }
 
+//    public UUID getUuid(){
+//        return uuid;
+//    }
+
+
 //    public void setId(UUID productId) {
 //
 //    }
