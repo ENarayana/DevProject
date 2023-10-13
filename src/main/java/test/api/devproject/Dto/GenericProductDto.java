@@ -18,8 +18,12 @@ public class GenericProductDto {
     private String description;
     private Price price = new Price();
     private String image;
-    private String category;
+   // private String category;
     private String name;
+
+
+// Other properties and getters/setters
+
 
     public void setId(UUID id){
         if (id != null){
