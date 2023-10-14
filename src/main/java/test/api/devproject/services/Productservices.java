@@ -16,9 +16,9 @@ public interface Productservices {
 
     List<GenericProductDto> getProducts();
 
-   // GenericProductDto getSingleProduct(UUID id);
+    // GenericProductDto getSingleProduct(UUID id);
 
-    GenericProductDto deleteProduct(Long id);
+    void deleteProduct(Long id);
 
     GenericProductDto getProductSingle(Long id);
 

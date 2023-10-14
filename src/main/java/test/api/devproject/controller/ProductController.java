@@ -18,7 +18,7 @@ import java.util.UUID;
 public class ProductController {
     //    @Autowired
     // field injection
- //   private ProductService productService;
+    //   private ProductService productService;
     private Productservices productservices;
 
 
@@ -77,13 +77,13 @@ public class ProductController {
 //        Comparator
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<GenericProductDto> deleteProductById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(
-                productservices.deleteProduct(id),
-                HttpStatus.OK
-        );
-    }
+//    @DeleteMapping("{id}")
+//    public ResponseEntity<GenericProductDto> deleteProductById(@PathVariable("id") Long id) {
+//        return new ResponseEntity<>(
+//                productservices.deleteProduct(id),
+//                HttpStatus.OK
+//        );
+//    }
 
 //    @PostMapping
 //    public GenericProductDto createProduct(@RequestBody GenericProductDto product) {
@@ -110,5 +110,10 @@ public class ProductController {
     @PutMapping("/updateByID/{id}")
     public GenericProductDto updateProductById(@PathVariable Long id,@RequestBody GenericProductDto genericProductDto) {
         return productservices.updateProduct(id, genericProductDto);
+    }
+
+    @DeleteMapping("/deleteByid/{id}")
+    public void deleteProductById(@PathVariable Long id){
+        productservices.deleteProduct(id);
     }
 }
