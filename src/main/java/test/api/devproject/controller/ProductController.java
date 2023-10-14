@@ -107,8 +107,8 @@ public class ProductController {
         return productservices.getProductSingle(id);
     }
 
-    @PutMapping("{id}")
-    public void updateProductById() {
-
+    @PutMapping("/updateByID/{id}")
+    public GenericProductDto updateProductById(@PathVariable Long id,@RequestBody GenericProductDto genericProductDto) {
+        return productservices.updateProduct(id, genericProductDto);
     }
 }
