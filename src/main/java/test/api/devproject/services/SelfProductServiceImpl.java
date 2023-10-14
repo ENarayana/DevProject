@@ -1,5 +1,6 @@
 package test.api.devproject.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
@@ -68,9 +69,27 @@ public class SelfProductServiceImpl implements Productservices {
     }
 
     @Override
-    public GenericProductDto updateProduct(Long id, GenericProductDto product) {
-        
-        return null;
+    public GenericProductDto updateProduct(Long id, GenericProductDto genericProductDto) {
+
+        Product productUpdate = productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Product Not found: " + id));
+
+       // productUpdate.setId(genericProductDto.getId());
+        productUpdate.setImage(genericProductDto.getImage());
+        productUpdate.setDescription(genericProductDto.getDescription());
+        productUpdate.setTitle(genericProductDto.getTitle());
+
+        productUpdate.getCategory().setName(genericProductDto.getName());
+
+        productUpdate.getPrice().setPrice(genericProductDto.getPrice().getPrice());
+        productUpdate.getPrice().setCurrency(genericProductDto.getPrice().getCurrency());
+
+      Product updatedProduct = productRepository.save(productUpdate);
+
+      genericProductDto.setId(updatedProduct.getId());
+      genericProductDto.getPrice().setId(updatedProduct.getPrice().getId());
+
+        return genericProductDto;
     }
 
     @Override
