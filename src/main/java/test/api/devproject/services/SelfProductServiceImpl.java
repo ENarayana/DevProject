@@ -62,8 +62,8 @@ public class SelfProductServiceImpl implements Productservices {
         product.setPrice(price);
         productRepository.save(product);
 
-       genericProductDto.setId(product.getId());
-       genericProductDto.getPrice().setId(price.getId());
+        genericProductDto.setId(product.getId());
+        genericProductDto.getPrice().setId(price.getId());
 
         return genericProductDto;
     }
@@ -74,7 +74,7 @@ public class SelfProductServiceImpl implements Productservices {
         Product productUpdate = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Product Not found: " + id));
 
-       // productUpdate.setId(genericProductDto.getId());
+        // productUpdate.setId(genericProductDto.getId());
         productUpdate.setImage(genericProductDto.getImage());
         productUpdate.setDescription(genericProductDto.getDescription());
         productUpdate.setTitle(genericProductDto.getTitle());
@@ -84,10 +84,10 @@ public class SelfProductServiceImpl implements Productservices {
         productUpdate.getPrice().setPrice(genericProductDto.getPrice().getPrice());
         productUpdate.getPrice().setCurrency(genericProductDto.getPrice().getCurrency());
 
-      Product updatedProduct = productRepository.save(productUpdate);
+        Product updatedProduct = productRepository.save(productUpdate);
 
-      genericProductDto.setId(updatedProduct.getId());
-      genericProductDto.getPrice().setId(updatedProduct.getPrice().getId());
+        genericProductDto.setId(updatedProduct.getId());
+        genericProductDto.getPrice().setId(updatedProduct.getPrice().getId());
 
         return genericProductDto;
     }
@@ -115,13 +115,13 @@ public class SelfProductServiceImpl implements Productservices {
             genericProductDto.setDescription(product.getDescription());
             genericProductDto.setImage(product.getImage());
             genericProductDto.setPrice(product.getPrice());
-           genericProductDto.setId(product.getId());
+            genericProductDto.setId(product.getId());
             productDtos.add(genericProductDto);
         }
         return productDtos;
     }
 
-  @Override
+    @Override
     public GenericProductDto getProductSingle(Long id){
 //      System.out.println("Received id: " + id);
         Optional<Product> productOptional = productRepository.findById(id);
@@ -162,7 +162,18 @@ public class SelfProductServiceImpl implements Productservices {
 
 
     @Override
-    public GenericProductDto deleteProduct(Long id) {
-        return null;
+    public void deleteProduct(Long id) {
+        // Check if the product with the given ID exists
+        Optional<Product> productOptional = productRepository.findById(id);
+
+        if (productOptional.isPresent()) {
+            // The product exists, so delete it
+            Product product = productOptional.get();
+            productRepository.deleteById(id);
+        } else {
+            // If the product doesn't exist, you can throw an exception or handle the situation as per your requirements
+            throw new ProductNotFoundException("Product not found for id: " + id);
+        }
     }
+
 }
