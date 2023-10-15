@@ -150,17 +150,6 @@ public class SelfProductServiceImpl implements Productservices {
         }
     }
 
-//            List<Product> products = productRepository.findAll();
-//            List<GenericProductDto> product = new ArrayList<>();
-//            products.forEach(prod -> {
-//                GenericProductDto genericproduct = convertProductToGenericProduct(prod);
-//                product.add(genericproduct);
-//            });
-//            return product;
-//        }
-
-
-
     @Override
     public void deleteProduct(Long id) {
         // Check if the product with the given ID exists
