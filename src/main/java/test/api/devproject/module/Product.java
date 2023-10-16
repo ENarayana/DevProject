@@ -26,16 +26,3 @@ public class Product extends BaseModule {
     private Category category;
 
 }
-
-//    public UUID getUuid() {
-//        return UUID.randomUUID();
-//    }
-
-
-//  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
-////    @Fetch(FetchMode.JOIN)
-//    private Price price;
-//    private int inventoryCount;
-
-
-//}

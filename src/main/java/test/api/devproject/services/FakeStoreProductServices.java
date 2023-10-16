@@ -9,7 +9,7 @@ import test.api.devproject.thirdPartyProductService.fakeStore.FakeStoreProductSe
 import java.util.*;
 
 @Repository("FakeStoreProductServices")
-public class FakeStoreProductServices implements Productservices {
+public abstract class FakeStoreProductServices implements Productservices {
 
     private FakeStoreProductServiceClient fakeStoreProductServiceClient;
 
