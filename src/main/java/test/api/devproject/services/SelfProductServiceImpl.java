@@ -3,8 +3,10 @@ package test.api.devproject.services;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import test.api.devproject.Dto.GenericProductDto;
@@ -19,7 +21,6 @@ import test.api.devproject.repository.ProductRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Primary
 @Service ("SelfProductServiceImpl")
@@ -165,4 +166,33 @@ public class SelfProductServiceImpl implements Productservices {
         }
     }
 
-}
+//    @Override
+//    public List<Product> findProductWithSorting(String field) {
+//        return productRepository.findAll(Sort.by(Sort.Direction.ASC,field));
+//
+//    }
+
+        @Override
+        public Page<GenericProductDto> getProducts(int page, int size) {
+            PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Order.asc("title")));
+            Page<Product> productsPage = productRepository.findAll(pageRequest);
+
+            Page<GenericProductDto> productDtos = productsPage.map(this::mapToDto);
+            return productDtos;
+        }
+
+        private GenericProductDto mapToDto(Product product) {
+            GenericProductDto dto = new GenericProductDto();
+            dto.setId(product.getId());
+            dto.setTitle(product.getTitle());
+            dto.setDescription(product.getDescription());
+            dto.setImage(product.getImage());
+            dto.setPrice(product.getPrice());
+            dto.setName(product.getCategory().getName());
+            return dto;
+        }
+
+
+    }
+
+

@@ -22,24 +22,3 @@ public class GenericProductDto {
     private String name;
 }
 
-// Other properties and getters/setters
-
-//
-//    public void setId(UUID id){
-//        if (id != null){
-//            this.id = id.toString();
-//        }
-//    }
-
-
-//    public void setId(UUID productId) {
-//
-//    }
-
-//    public void setId(Long id) {
-//
-//    }
-
-    //   public void setId(UUID productId) {
-
-//

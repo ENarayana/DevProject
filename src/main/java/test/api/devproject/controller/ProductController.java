@@ -2,11 +2,16 @@ package test.api.devproject.controller;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import test.api.devproject.Dto.GenericProductDto;
+import test.api.devproject.module.Product;
 import test.api.devproject.services.Productservices;
 
 import java.util.ArrayList;
@@ -116,4 +121,16 @@ public class ProductController {
     public void deleteProductById(@PathVariable Long id){
         productservices.deleteProduct(id);
     }
+
+        @GetMapping("/paged")
+        public ResponseEntity<Page<GenericProductDto>> getProducts(
+                @RequestParam(defaultValue = "0") int page,
+                @RequestParam(defaultValue = "10") int size) {
+
+            Page<GenericProductDto> productDtos = productservices.getProducts(page, size);
+            return ResponseEntity.ok(productDtos);
+        }
+
+
 }
+

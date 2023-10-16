@@ -1,10 +1,14 @@
 package test.api.devproject.repository;
 
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Repository;
+import test.api.devproject.Dto.GenericProductDto;
 import test.api.devproject.module.Category;
 import test.api.devproject.module.Product;
 
@@ -20,8 +24,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 //    @Query(value="SELECT protocol, COUNT(Distinct personID) from person_counts WHERE(datetime BETWEEN :beginDate and :endDate)and personID NOT LIKE '%test%' GROUP by protocol", nativeQuery=true)
 //    Map<String, BigInteger> findPersonCountsByDate(Date beginDate, Date endDate);
 
-
-   // Product findByTitleEqualsAndPrice(double price);
+    // Product findByTitleEqualsAndPrice(double price);
 
   //   Product findByTitleEquals(String title);
 
@@ -29,8 +32,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
  //   List<Product> findAllByPrice_Currency(String currency);
 
-    @Override
-    void delete(Product entity);
+//    @Override
+//    void delete(Product entity);
 
     // long countAllByPrice_Currency(String currency);
 
@@ -46,6 +49,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = CustomQueries.FIND_ALL_BY_TITLE, nativeQuery = true)
     List<Product> findAllByTitle(String naman);
+
+    Page<Product> findAll( Pageable pageable);
+
+
+
 
 //    @Query("select Product from Product where Product.price.currency = :currency and Product.title = :naman")
 //    List<Product> doSomething(String SWAMY, String currency);
