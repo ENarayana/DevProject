@@ -10,37 +10,15 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class GenericProductDto {
 
-    private String id;
+    private Long id;
     private String title;
     private String description;
     private Price price = new Price();
     private String image;
-   // private String category;
+  //  private String category;
     private String name;
-
-
-// Other properties and getters/setters
-
-
-    public void setId(UUID id){
-        if (id != null){
-            this.id = id.toString();
-        }
-    }
-
-
-//    public void setId(UUID productId) {
-//
-//    }
-
-//    public void setId(Long id) {
-//
-//    }
-
-    //   public void setId(UUID productId) {
-
-    }
+}
 

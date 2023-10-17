@@ -1,7 +1,6 @@
 package test.api.devproject.module;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import jdk.jfr.SettingDefinition;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +16,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Price extends BaseModule{
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Use the appropriate strategy for your database
+    private Long id;
 
   private String currency;
 

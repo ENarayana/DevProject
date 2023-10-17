@@ -8,5 +8,5 @@ import java.util.List;
 @Getter
 @Setter
 public class GetProductRequestDto {
-    private List<String> uuids;
+    private List<Long> id;
 }

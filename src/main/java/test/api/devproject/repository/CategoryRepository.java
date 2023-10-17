@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, UUID> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    Optional<Category> findById(UUID uuid);
+    Optional<Category> findById(Long id);
 
     @Override
-    List<Category> findAllById(Iterable<UUID> uuids);
+    List<Category> findAllById(Iterable<Long> id);
 
     Optional<Category> findByName(String name);
 }

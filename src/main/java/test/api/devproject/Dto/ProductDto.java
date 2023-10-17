@@ -15,9 +15,7 @@ public class ProductDto {
     private String image;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
     private Price price;
-    //            P : C
-    // => L to R: 1 : 1
-    // => R to L: m : 1
-    // => Ans:    m : 1
+
     }

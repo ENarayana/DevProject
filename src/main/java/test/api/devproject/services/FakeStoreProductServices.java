@@ -9,7 +9,7 @@ import test.api.devproject.thirdPartyProductService.fakeStore.FakeStoreProductSe
 import java.util.*;
 
 @Repository("FakeStoreProductServices")
-public class FakeStoreProductServices implements Productservices {
+public abstract class FakeStoreProductServices implements Productservices {
 
     private FakeStoreProductServiceClient fakeStoreProductServiceClient;
 
@@ -17,12 +17,12 @@ public class FakeStoreProductServices implements Productservices {
     private GenericProductDto convertFakeStoreProductIntoGenericProduct (FakeStoreDto fakeStoreDto) {
         GenericProductDto product = new GenericProductDto();
 
-    //    product.setId(fakeStoreDto.getId());
+        //    product.setId(fakeStoreDto.getId());
         product.setImage(fakeStoreDto.getImage());
         product.setDescription(fakeStoreDto.getDescription());
         product.setTitle(fakeStoreDto.getTitle());
-     //  product.setPrice(fakeStoreDto.getPrice());
-     //   product.setCategory(fakeStoreDto.getCategory());
+        //  product.setPrice(fakeStoreDto.getPrice());
+        //   product.setCategory(fakeStoreDto.getCategory());
 
         return product;
     }
@@ -34,7 +34,7 @@ public class FakeStoreProductServices implements Productservices {
     @Override
     public GenericProductDto createProduct(GenericProductDto product) {
         return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.createProduct(product));
-            }
+    }
 
 //    public GenericProductDto updateProduct(Long id) {
 //        RestTemplate restTemplate = restTemplateBuilder.build();
@@ -66,13 +66,18 @@ public class FakeStoreProductServices implements Productservices {
     }
 
     @Override
-    public GenericProductDto deleteProduct(Long id) {
+    public void deleteProduct(Long id) {
 
-        return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.deleteProduct(id));
     }
 
+//    @Override
+//    public GenericProductDto deleteProduct(Long id) {
+//
+//        return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.deleteProduct(id));
+//    }
+
     @Override
-    public GenericProductDto getProductSingle(UUID id) {
+    public GenericProductDto getProductSingle(Long id) {
         return null;
     }
 }
