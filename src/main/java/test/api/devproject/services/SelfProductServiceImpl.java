@@ -166,11 +166,6 @@ public class SelfProductServiceImpl implements Productservices {
         }
     }
 
-//    @Override
-//    public List<Product> findProductWithSorting(String field) {
-//        return productRepository.findAll(Sort.by(Sort.Direction.ASC,field));
-//
-//    }
 
         @Override
         public Page<GenericProductDto> getProducts(int page, int size) {
