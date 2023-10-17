@@ -7,6 +7,7 @@ import test.api.devproject.Dto.GenericProductDto;
 import test.api.devproject.module.Product;
 
 import java.util.List;
+import java.util.Map;
 
 public interface Productservices {
     GenericProductDto createProduct(GenericProductDto genericProductDto);
@@ -30,4 +31,6 @@ public interface Productservices {
 
 
     Page<GenericProductDto> getProducts(int page, int size);
+
+//    List<GenericProductDto> filterProducts(Map<String, String> filterParams);
 }
