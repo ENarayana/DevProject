@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import test.api.devproject.services.Productservices;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -47,23 +49,13 @@ public class ProductController {
         if (productDtos.isEmpty()) {
             return new ResponseEntity<>(
                     productDtos,
-                    HttpStatus.NOT_FOUND
-            );
+                    HttpStatus.NOT_FOUND);
         }
-
         List<GenericProductDto> genericProductDtos = new ArrayList<>();
-
         for (GenericProductDto gpd: productDtos) {
             genericProductDtos.add(gpd);
-        };
-
-//        genericProductDtos.remove(genericProductDtos.get(0));
-
+        }
         return new ResponseEntity<>(genericProductDtos, HttpStatus.OK);
-
-//        productDtos.get(0).setId(1001L);
-//
-//        return new ResponseEntity<>(productDtos, HttpStatus.OK);
     }
 
     // localhost:8080/products/{id}
@@ -122,8 +114,8 @@ public class ProductController {
         productservices.deleteProduct(id);
     }
 
-        @GetMapping("/paged")
-        public ResponseEntity<Page<GenericProductDto>> getProducts(
+    @GetMapping("/paged")
+    public ResponseEntity<Page<GenericProductDto>> getProducts(
                 @RequestParam(defaultValue = "0") int page,
                 @RequestParam(defaultValue = "10") int size) {
 
@@ -131,6 +123,15 @@ public class ProductController {
             return ResponseEntity.ok(productDtos);
         }
 
+    @GetMapping("/filter")
+    public ResponseEntity<Page<GenericProductDto>> filterProducts(
+            @RequestParam Map<String, String> filterParams,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Page<GenericProductDto> filteredProductDtos = productservices.filterProducts(filterParams, page, size);
+        return ResponseEntity.ok(filteredProductDtos);
+    }
+
 
 }
-
