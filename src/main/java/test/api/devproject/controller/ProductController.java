@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -121,4 +122,16 @@ public class ProductController {
             Page<GenericProductDto> productDtos = productservices.getProducts(page, size);
             return ResponseEntity.ok(productDtos);
         }
+
+    @GetMapping("/filter")
+    public ResponseEntity<Page<GenericProductDto>> filterProducts(
+            @RequestParam Map<String, String> filterParams,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Page<GenericProductDto> filteredProductDtos = productservices.filterProducts(filterParams, page, size);
+        return ResponseEntity.ok(filteredProductDtos);
+    }
+
+
 }

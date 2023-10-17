@@ -127,11 +127,11 @@ public class SelfProductServiceImpl implements Productservices {
     }
 
     @Override
-    public GenericProductDto getProductSingle(Long id){
+    public GenericProductDto getProductSingle(Long id) {
 //      System.out.println("Received id: " + id);
         Optional<Product> productOptional = productRepository.findById(id);
 //      System.out.println("Product present: " + productOptional.isPresent());
-        if(productOptional.isPresent()) {
+        if (productOptional.isPresent()) {
             Product product = productOptional.get();
 
             GenericProductDto genericProductDto = new GenericProductDto();
@@ -143,11 +143,11 @@ public class SelfProductServiceImpl implements Productservices {
             genericProductDto.setPrice(product.getPrice());
 
             return genericProductDto;
-        }
-        else {
+        } else {
             throw new ProductNotFoundException("Product not found for id: " + id);
         }
     }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public class ProductNotFoundException extends RuntimeException {
         public ProductNotFoundException(String message) {
@@ -171,26 +171,62 @@ public class SelfProductServiceImpl implements Productservices {
     }
 
 
-        @Override
-        public Page<GenericProductDto> getProducts(int page, int size) {
-            PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Order.asc("title")));
-            Page<Product> productsPage = productRepository.findAll(pageRequest);
+    @Override
+    public Page<GenericProductDto> getProducts(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Order.asc("title")));
+        Page<Product> productsPage = productRepository.findAll(pageRequest);
 
-            Page<GenericProductDto> productDtos = productsPage.map(this::mapToDto);
-            return productDtos;
-        }
+        Page<GenericProductDto> productDtos = productsPage.map(this::mapToDto);
+        return productDtos;
+    }
 
-        private GenericProductDto mapToDto(Product product) {
-            GenericProductDto dto = new GenericProductDto();
-            dto.setId(product.getId());
-            dto.setTitle(product.getTitle());
-            dto.setDescription(product.getDescription());
-            dto.setImage(product.getImage());
-            dto.setPrice(product.getPrice());
-            dto.setName(product.getCategory().getName());
-            return dto;
-        }
+    private GenericProductDto mapToDto(Product product) {
+        GenericProductDto dto = new GenericProductDto();
+        dto.setId(product.getId());
+        dto.setTitle(product.getTitle());
+        dto.setDescription(product.getDescription());
+        dto.setImage(product.getImage());
+        dto.setPrice(product.getPrice());
+        dto.setName(product.getCategory().getName());
+        return dto;
+    }
+
+
+    @Override
+    public Page<GenericProductDto> filterProducts(Map<String, String> filterParams, int page, int size) {
+        // Create a Pageable instance to handle pagination
+        Pageable pageable = PageRequest.of(page, size);
+
+        // Build the Specification for dynamic filtering
+        Specification<Product> spec = (root, query, criteriaBuilder) -> {
+            Predicate predicate = criteriaBuilder.conjunction();
+
+            for (Map.Entry<String, String> entry : filterParams.entrySet()) {
+                String field = entry.getKey();
+                String value = entry.getValue();
+                if (field != null && value != null) {
+                    predicate = criteriaBuilder.and(
+                            predicate,
+                            criteriaBuilder.equal(root.get(field), value)
+                    );
+                }
+            }
+            return predicate;
+        };
+
+        // Use the Specification and pageable to filter products
+        Page<Product> filteredProducts = productRepository.findAll(spec, pageable);
+
+        // Map the filtered products to DTOs
+        Page<GenericProductDto> productDtos = filteredProducts.map(this::mapToDto);
+
+        return productDtos;
+    }
+
+
 
 }
+
+
 
 

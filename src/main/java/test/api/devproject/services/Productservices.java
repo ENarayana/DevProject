@@ -2,7 +2,7 @@ package test.api.devproject.services;
 
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import test.api.devproject.Dto.GenericProductDto;
 import test.api.devproject.module.Product;
 
@@ -22,15 +22,8 @@ public interface Productservices {
 
     GenericProductDto getProductSingle(Long id);
 
-    //    @Override
-    //    public List<Product> findProductWithSorting(String field) {
-    //        return productRepository.findAll(Sort.by(Sort.Direction.ASC,field));
-    //
-    //    }
-//    Page<GenericProductDto> getProducts(int page, int size);
-
-
     Page<GenericProductDto> getProducts(int page, int size);
 
-//    List<GenericProductDto> filterProducts(Map<String, String> filterParams);
+    Page<GenericProductDto> filterProducts(Map<String, String> filterParams, int page, int size);
+
 }
