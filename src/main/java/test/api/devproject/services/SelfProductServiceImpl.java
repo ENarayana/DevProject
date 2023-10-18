@@ -196,7 +196,6 @@ public class SelfProductServiceImpl implements Productservices {
     public Page<GenericProductDto> filterProducts(Map<String, String> filterParams, int page, int size) {
         // Create a Pageable instance to handle pagination
         Pageable pageable = PageRequest.of(page, size);
-
         // Build the Specification for dynamic filtering
         Specification<Product> spec = (root, query, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();
