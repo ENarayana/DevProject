@@ -2,9 +2,7 @@ package test.api.devproject.services;
 
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import test.api.devproject.Dto.GenericProductDto;
-import test.api.devproject.module.Product;
 
 import java.util.List;
 import java.util.Map;
