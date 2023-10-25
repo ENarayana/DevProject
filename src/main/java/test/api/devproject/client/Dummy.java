@@ -17,15 +17,9 @@ public class Dummy {
     public static void main(String[] args) {
 
         Dummy dummy = new Dummy(2012);
-
         System.out.println(dummy.year);
-
         System.out.println("Thank you ");
-
         System.out.println("Good work");
-
-        System.out.println("Be Strong");
-
     }
 
 }
