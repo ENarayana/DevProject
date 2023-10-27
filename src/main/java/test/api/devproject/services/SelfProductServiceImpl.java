@@ -79,7 +79,6 @@ public class SelfProductServiceImpl implements Productservices {
         Product productUpdate = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Product Not found: " + id));
 
-        // productUpdate.setId(genericProductDto.getId());
         productUpdate.setImage(genericProductDto.getImage());
         productUpdate.setDescription(genericProductDto.getDescription());
         productUpdate.setTitle(genericProductDto.getTitle());
@@ -128,9 +127,7 @@ public class SelfProductServiceImpl implements Productservices {
 
     @Override
     public GenericProductDto getProductSingle(Long id) {
-//      System.out.println("Received id: " + id);
         Optional<Product> productOptional = productRepository.findById(id);
-//      System.out.println("Product present: " + productOptional.isPresent());
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
 
@@ -196,7 +193,6 @@ public class SelfProductServiceImpl implements Productservices {
     public Page<GenericProductDto> filterProducts(Map<String, String> filterParams, int page, int size) {
         // Create a Pageable instance to handle pagination
         Pageable pageable = PageRequest.of(page, size);
-
         // Build the Specification for dynamic filtering
         Specification<Product> spec = (root, query, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();
