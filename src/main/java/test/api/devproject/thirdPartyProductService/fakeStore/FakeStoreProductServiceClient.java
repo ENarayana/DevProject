@@ -26,8 +26,6 @@ public class FakeStoreProductServiceClient  {
         this.restTemplateBuilder = restTemplateBuilder;
     }
 
-
-
     public FakeStoreDto createProduct(GenericProductDto  product) {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreDto> response =
