@@ -3,6 +3,7 @@ package test.api.devproject.services;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.criteria.Predicate;
 import org.hibernate.Hibernate;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,9 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import test.api.devproject.Dto.GenericProductDto;
+import test.api.devproject.inheritanceDemo.joinedTable.User;
 import test.api.devproject.module.Category;
 import test.api.devproject.module.Price;
 import test.api.devproject.module.Product;
@@ -21,11 +24,12 @@ import test.api.devproject.repository.CustomQueries;
 import test.api.devproject.repository.PriceRepository;
 import test.api.devproject.repository.ProductRepository;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+import org.slf4j.Logger;
 @Primary
 @Service ("SelfProductServiceImpl")
 public class SelfProductServiceImpl implements Productservices {
@@ -219,6 +223,12 @@ public class SelfProductServiceImpl implements Productservices {
         return productDtos;
     }
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SelfProductServiceImpl.class);
+
+    @KafkaListener(topics = "${spring.kafka.topic-json.name}", groupId = "${spring.kafka.consumer.group-id}")
+    public void consume(User user){
+        LOGGER.info(String.format("Json message recieved -> %s", user.toString()));
+    }
 
 
 }
