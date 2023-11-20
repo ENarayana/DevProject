@@ -21,5 +21,8 @@ public class Dummy {
         System.out.println("Thank you ");
         System.out.println("Good work");
         System.out.println("Have a nice day");
+        System.out.println("Have a nice day");
+        System.out.println("Have a nice day");
+
     }
 }
